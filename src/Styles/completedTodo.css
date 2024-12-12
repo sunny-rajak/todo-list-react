@@ -1,0 +1,38 @@
+.completed_todo_container{
+    width: 80%;
+    margin: 0px auto;
+    padding: 20px 40px;
+    background-color: #344e41;
+    box-shadow: 0px 5px 7px rgba(95, 92, 92);
+}
+
+.completed_todo_container h2{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+.scrollable_container{
+    max-height: 35vh;
+    overflow-y: auto;
+}
+
+.completed_todo_item{
+    padding: 10px 20px;
+    background-color: #3b6951;
+    box-shadow: 10px 2px 5px #23342b;
+    margin-bottom: 8px;
+}
+
+.completed_todo_item h3{
+    color: #16db65;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.completed_todo_item p{
+    font-size: 16px;
+    color: rgb(214, 213, 213);
+}

@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Todo from "./Components/Todo";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AddedTodo from "./Components/AddedTodo";
+import CompletedTodo from "./Components/CompletedTodo";
+import { TodoProvider } from "./Context/TodoProvider";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <TodoProvider>
+            <BrowserRouter>
+                <Todo />
+                <Routes>
+                    <Route path="/" element={<AddedTodo />}></Route>
+                    <Route
+                        path="/completed"
+                        element={<CompletedTodo />}
+                    ></Route>
+                </Routes>
+            </BrowserRouter>
+        </TodoProvider>
+    );
+};
 
 export default App;
