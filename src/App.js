@@ -9,7 +9,7 @@ import { TodoProvider } from "./Context/TodoProvider";
 const App = () => {
     return (
         <TodoProvider>
-            <BrowserRouter>
+            <BrowserRouter basename="/todo-list-react">
                 <Todo />
                 <Routes>
                     <Route path="/" element={<AddedTodo />}></Route>
@@ -17,6 +17,7 @@ const App = () => {
                         path="/completed"
                         element={<CompletedTodo />}
                     ></Route>
+                    <Route path="*" element={<p>Page Not Found</p>} />
                 </Routes>
             </BrowserRouter>
         </TodoProvider>
