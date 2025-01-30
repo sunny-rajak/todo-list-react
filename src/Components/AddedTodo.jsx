@@ -4,19 +4,20 @@ import "../Styles/addedTodo.css";
 import { MdDelete } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
+import { index } from "mathjs";
+import { editableInputTypes } from "@testing-library/user-event/dist/utils";
 
 const AddedTodo = () => {
     const { allTodos, setAllTodos, completedTodos, setCompletedTodos } =
         useContext(TodoContext);
 
-    const [isEditing, setIsEditing] = useState(null); // Track which Todo is being edited
+    const [isEditing, setIsEditing] = useState(null); // Track which todo is being edited
     const [editedTodo, setEditedTodo] = useState({
         title: "",
         description: "",
-    }); // Store edited values
+    }); // Stores edited value
 
     const handleEditClick = (index) => {
-        // When edit button is clicked, set the selected Todo for editing
         setIsEditing(index);
         setEditedTodo({
             title: allTodos[index].title,
@@ -25,6 +26,12 @@ const AddedTodo = () => {
     };
 
     const handleSaveClick = () => {
+        // Check if title and description is empty
+        if (!editedTodo.title.trim() || !editedTodo.description.trim()) {
+            alert("Title and description cannot be empty");
+            return;
+        }
+
         // Save the edited Todo
         const updatedTodos = [...allTodos];
         updatedTodos[isEditing] = editedTodo;
@@ -33,7 +40,6 @@ const AddedTodo = () => {
     };
 
     const handleChange = (e) => {
-        // Update the editedTodo state when user changes the input
         const { name, value } = e.target;
         setEditedTodo((prev) => ({ ...prev, [name]: value }));
     };
@@ -76,21 +82,20 @@ const AddedTodo = () => {
                     <p className="pre_text">No Todos Available</p>
                 ) : (
                     allTodos.map((todo, index) => (
-                        <div className="added_todo_item" key={index}>
+                        <div className="added_todo_item">
                             <div className="added_todo_content">
                                 {isEditing === index ? (
-                                    // Inline editing enabled
                                     <div className="edit_container">
                                         <div className="edit_title">
                                             <p>
                                                 <strong>Title : </strong>
                                             </p>
                                             <input
+                                                placeholder="Edit title"
                                                 type="text"
                                                 name="title"
                                                 value={editedTodo.title}
                                                 onChange={handleChange}
-                                                placeholder="Edit title"
                                             />
                                         </div>
 
@@ -99,11 +104,11 @@ const AddedTodo = () => {
                                                 <strong>Description : </strong>
                                             </p>
                                             <input
+                                                placeholder="Edit description"
                                                 type="text"
                                                 name="description"
                                                 value={editedTodo.description}
                                                 onChange={handleChange}
-                                                placeholder="Edit description"
                                             />
                                         </div>
                                     </div>
@@ -119,14 +124,14 @@ const AddedTodo = () => {
 
                             <div className="added_todo_icons">
                                 {isEditing === index ? (
-                                    // Show "Save" button when editing
+                                    // Show save button when editing
                                     <button onClick={handleSaveClick}>
                                         Save
                                     </button>
                                 ) : (
                                     <FaRegEdit
                                         className="edit_icon"
-                                        title="Edit"
+                                        title="edit"
                                         onClick={() => handleEditClick(index)}
                                     />
                                 )}

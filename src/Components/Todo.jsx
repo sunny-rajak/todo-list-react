@@ -12,6 +12,7 @@ const Todo = () => {
     const handleAddClick = () => {
         if (!newTitle.trim() || !newDescription.trim()) {
             alert("Title and description cannot be empty");
+            return;
         }
 
         let newTodoItems = {
